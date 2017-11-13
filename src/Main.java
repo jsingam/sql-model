@@ -61,7 +61,11 @@ public class Main {
             mainModel.append(tableName[1]);
             mainModel.append("\")\n" +
                     "@IdClass(");
-            String className=tableName[1].substring(1);
+            String className;
+            if(tableName[1].substring(0,2).equals("sv")){
+                className=tableName[1].substring(3);
+            }
+            else className=tableName[1].substring(1);
             mainModel.append(className);
             mainModel.append("Id.class)\n" +
                     "public class ");
@@ -86,9 +90,8 @@ public class Main {
                     mainModel.append("@Id\n" +
                             "    ");
                     idModel.append("    private ");
-                    idModel.append(data[a].substring(0,1).toLowerCase()+data[a].substring(1));
-                    idModel.append(";\n" +
-                            "    ");
+
+
                 }
                 mainModel.append("@Column(name = \"");
                 mainModel.append(data[a]);
@@ -97,34 +100,66 @@ public class Main {
 
                 if(data[a+1].contains("char")){
                     mainModel.append("String ");
-                    idModel.append("String ");
+                    if(prime.contains(data[a])) {
+                        idModel.append("String ");
+                        idModel.append(data[a].substring(0, 1).toLowerCase() + data[a].substring(1));
+                        idModel.append(";\n" +
+                                "    ");
+                    }
                 }
                 else if(data[a+1].contains("tinyint")){
                     mainModel.append("Boolean ");
-                    idModel.append("Boolean ");
+                    if(prime.contains(data[a])) {
+                        idModel.append("Boolean ");
+                        idModel.append(data[a].substring(0, 1).toLowerCase() + data[a].substring(1));
+                        idModel.append(";\n" +
+                                "    ");
+                    }
                 }
                 else if(data[a+1].contains("blob")){
                     mainModel.append("Blob ");
-                    idModel.append("Blob ");
+                    if(prime.contains(data[a])) {
+                        idModel.append("Blob ");
+                        idModel.append(data[a].substring(0, 1).toLowerCase() + data[a].substring(1));
+                        idModel.append(";\n" +
+                                "    ");
+                    }
                 }
                 else if(data[a+1].contains("int")){
                     mainModel.append("Integer ");
-                    idModel.append("Integer ");
+                    if(prime.contains(data[a])) {
+                        idModel.append("Integer ");
+                        idModel.append(data[a].substring(0, 1).toLowerCase() + data[a].substring(1));
+                        idModel.append(";\n" +
+                                "    ");
+                    }
                 }
                 else if(data[a+1].contains("timestamp")){
                     mainModel.append("Date ");
-                    idModel.append("Date ");
+                    if(prime.contains(data[a])) {
+                        idModel.append("Date ");
+                        idModel.append(data[a].substring(0, 1).toLowerCase() + data[a].substring(1));
+                        idModel.append(";\n" +
+                                "    ");
+                    }
                 }
                 else if(data[a+1].contains("double")){
                     mainModel.append("Double ");
-                    idModel.append("Double ");
+                    if(prime.contains(data[a])) {
+                        idModel.append("Double ");
+                        idModel.append(data[a].substring(0, 1).toLowerCase() + data[a].substring(1));
+                        idModel.append(";\n" +
+                                "    ");
+                    }
                 }
                 else System.out.println(data[a+1]);
                 mainModel.append(data[a].substring(0,1).toLowerCase()+data[a].substring(1));
                 mainModel.append(";\n" +
                         "    ");
 
+
             }
+
             mainModel.append("\n" +
                     "\n" +
                     "}\n");
